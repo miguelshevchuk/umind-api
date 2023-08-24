@@ -27,5 +27,5 @@ def getResult():
     return jsonify(results)
 
 
-app.run(host='0.0.0.0')
-serve(app, host='0.0.0.0', port=5000)
+app.run()
+serve(app, port=5000)
