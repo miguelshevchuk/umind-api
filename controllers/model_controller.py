@@ -32,6 +32,7 @@ def armarDetecciones(boxes):
         "mano":[],
         "brazoi": [],
         "brazod": [],
+        "brazos": [],
         "cabeza": [],
         "oreja": [],
         "ojos": [],
@@ -55,6 +56,17 @@ def armarDetecciones(boxes):
             "clase": clase
         }
         predicciones[clase].append(prediccion)
+        if clase == "brazoD" or clase == "brazoI":
+            clase = "brazos"
+            prediccion = {
+                "xyxy": xyxy,
+                "ancho": anchoDeteccion,
+                "alto": altoDeteccion,
+                "clase": clase
+            }
+            predicciones[clase].append(prediccion)
+
+
 
     print("Se encontraron: ")
     print("Manos: "+ str(len(predicciones["mano"])))
@@ -82,13 +94,3 @@ cloudinary.config(
 def subirImagen(img, id):
     cloudinary.uploader.upload(img, public_id=str(id))
 
-
-{
-    "manos":[
-        {
-            "xyxy":[],
-            "ancho": 11,
-            "alto": 11
-        }
-    ]
-}
