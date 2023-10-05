@@ -13,18 +13,34 @@ def predict(img):
         id=random.randrange(9999999999999999999999999)
         urlImagen = "https://res.cloudinary.com/dgvsnqsq0/image/upload/v1692754492/"+str(id)+".jpg"
         subirImagen(img, id)
-        print("URL de la imagen: "+urlImagen)
-        model = YOLO(modeloEntrenado)
-        print("Iniciando prediccion")
-        results = model(urlImagen)
-        resultado=results[0]
-        detecciones = armarDetecciones(resultado.boxes)
-        remove("./"+str(id)+".jpg")
 
-        return indicadores_controller.generarIndicadores(detecciones)
+        resultados = predecir(urlImagen, str(id)+".jpg")
+        return resultados
     except Exception as e:
         print("error")
         print(e)
+
+def predictImgCargada(img):
+    try:
+        nombreArchivo = img.split("/")
+        resultados = predecir(img, nombreArchivo[len(nombreArchivo)-1])
+        return resultados
+    except Exception as e:
+        print("error")
+        print(e)
+
+def predecir(img, nombreArchivo):
+    modeloEntrenado = "./modelUmind.pt"
+    print("URL de la imagen: " + img)
+    model = YOLO(modeloEntrenado)
+    print("Iniciando prediccion")
+    results = model(img)
+    resultado = results[0]
+    detecciones = armarDetecciones(resultado.boxes)
+    remove("./" + nombreArchivo)
+
+
+    return indicadores_controller.generarIndicadores(detecciones)
 
 def armarDetecciones(boxes):
     print("Armando predicciones")

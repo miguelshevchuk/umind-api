@@ -27,6 +27,12 @@ def getResult():
     results = model_controller.predict(req["imagen"])
     return jsonify(results)
 
+@app.route('/predict/url', methods=['POST'])
+def getResultURL():
+    req = request.json
+    results = model_controller.predictImgCargada(req["imagen"])
+    return jsonify(results)
+
 
 if __name__ == "__main__":
     app.run()
