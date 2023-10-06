@@ -43,7 +43,7 @@ def sinManos(predicciones, indicadores):
         })
 
 def sinBrazos(predicciones, indicadores):
-    if len(predicciones["brazod"]) == 0 or len(predicciones["brazoi"]) == 0:
+    if len(predicciones["brazos"]) == 0:
         indicadores.append({
             "Indicador": "No se detectan brazos",
             "Descripcion": "Puede indicar un pedido de ayuda del paciente"
@@ -116,11 +116,11 @@ def sinOjos(predicciones, indicadores):
             "Descripcion": "Puede reflejar negación a los problemas, rechazo a enfrentar al mundo y escapar a la fantasía."
         })
 def brazosCortos(predicciones, indicadores):
-    if len(predicciones["brazod"]) > 0 and len(predicciones["brazoi"]) > 0:
-        brazoD = predicciones["brazod"][0]
-        brazoI = predicciones["brazoi"][0]
+    if len(predicciones["brazos"]) > 1:
+        brazoD = predicciones["brazos"][0]
+        brazoI = predicciones["brazos"][1]
         torso = predicciones["torso"][0]
-        if (len(predicciones["brazod"]) > 0 and len(predicciones["brazoi"]) > 0) and (brazoD["alto"] <= torso["alto"]*0.50 or brazoI["alto"] <= torso["alto"]*0.50):
+        if brazoD["alto"] <= torso["alto"]*0.50 or brazoI["alto"] <= torso["alto"]*0.50:
             indicadores.append({
                 "Indicador": "Tamaño de brazos muy corto",
                 "Descripcion": "Puede ser indicador de aislamiento social"
@@ -140,9 +140,9 @@ def brazosCortos(predicciones, indicadores):
 
 
 def brazosLargos(predicciones, indicadores):
-    if len(predicciones["brazod"]) > 0 and len(predicciones["brazoi"]) > 0:
-        brazoD = predicciones["brazod"][0]
-        brazoI = predicciones["brazoi"][0]
+    if len(predicciones["brazos"]) > 1:
+        brazoD = predicciones["brazos"][0]
+        brazoI = predicciones["brazos"][1]
         torso = predicciones["torso"][0]
         if brazoD["alto"] >= torso["alto"] * 1.15 or brazoI["alto"] >= torso["alto"] * 1.15:
             indicadores.append({

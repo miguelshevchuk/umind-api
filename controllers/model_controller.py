@@ -72,7 +72,7 @@ def armarDetecciones(boxes):
             "clase": clase
         }
         predicciones[clase].append(prediccion)
-        if clase == "brazoD" or clase == "brazoI":
+        if clase == "brazod" or clase == "brazoi":
             clase = "brazos"
             prediccion = {
                 "xyxy": xyxy,
