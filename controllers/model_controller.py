@@ -5,7 +5,7 @@ import random
 from os import remove
 from controllers.indicadores import indicadores_controller
 
-partes = {0: 'brazoi', 1: 'brazod', 2: 'cabeza', 3: 'oreja', 4: 'ojos', 5: 'nariz', 6: 'feliz', 7: 'piernai', 8: 'piernad', 9: 'pie', 10: 'torso', 11: 'mano'}
+partes = {0: 'cabeza', 1: 'oreja', 2: 'ojos', 3: 'nariz', 4: 'feliz', 5: 'pierna', 6: 'pie', 7: 'torso', 8: 'mano', 9: 'brazo'}
 
 def predict(img):
     modeloEntrenado = "./modelUmind.pt"
@@ -46,16 +46,13 @@ def armarDetecciones(boxes):
     print("Armando predicciones")
     predicciones = {
         "mano":[],
-        "brazoi": [],
-        "brazod": [],
-        "brazos": [],
+        "brazo": [],
         "cabeza": [],
         "oreja": [],
         "ojos": [],
         "nariz": [],
         "feliz": [],
-        "piernai": [],
-        "piernad": [],
+        "pierna": [],
         "pie": [],
         "torso": []
 
@@ -72,29 +69,18 @@ def armarDetecciones(boxes):
             "clase": clase
         }
         predicciones[clase].append(prediccion)
-        if clase == "brazod" or clase == "brazoi":
-            clase = "brazos"
-            prediccion = {
-                "xyxy": xyxy,
-                "ancho": anchoDeteccion,
-                "alto": altoDeteccion,
-                "clase": clase
-            }
-            predicciones[clase].append(prediccion)
 
 
 
     print("Se encontraron: ")
     print("Manos: "+ str(len(predicciones["mano"])))
-    print("Brazos izquierdos: " + str(len(predicciones["brazoi"])))
-    print("Brazos derechos: " + str(len(predicciones["brazod"])))
+    print("Brazos: " + str(len(predicciones["brazo"])))
     print("Cabezas: " + str(len(predicciones["cabeza"])))
     print("Orejas: " + str(len(predicciones["oreja"])))
     print("Ojos: " + str(len(predicciones["ojos"])))
     print("Narices: " + str(len(predicciones["nariz"])))
     print("Bocas Felices: " + str(len(predicciones["feliz"])))
-    print("Piernas izquierdas: " + str(len(predicciones["piernai"])))
-    print("Piernas derechas: " + str(len(predicciones["piernad"])))
+    print("Piernas: " + str(len(predicciones["pierna"])))
     print("Pies: " + str(len(predicciones["pie"])))
     print("Torsos: " + str(len(predicciones["torso"])))
 
