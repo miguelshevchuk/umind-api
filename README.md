@@ -1,131 +1,78 @@
-<!--
-title: 'Serverless Framework Python Flask API on AWS'
-description: 'This template demonstrates how to develop and deploy a simple Python Flask API running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: Python
-priority: 2
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# UMind-api
 
-# Serverless Framework Python Flask API on AWS
-
-This template demonstrates how to develop and deploy a simple Python Flask API service running on AWS Lambda using the traditional Serverless Framework.
+UMind-api es un servicio backend desarrollado en Python, que sirve para analizar los Dibujos y realizar una clasificacion de indicadores emocionales.
 
 
-## Anatomy of the template
+## Estructura del proyecto
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to configured `httpApi` events. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the events are configured in a way to accept all incoming requests, `Flask` framework is responsible for routing and handling requests internally. The implementation takes advantage of `serverless-wsgi`, which allows you to wrap WSGI applications such as Flask apps. To learn more about `serverless-wsgi`, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi). Additionally, the template relies on `serverless-python-requirements` plugin for packaging dependencies from `requirements.txt` file. For more details about `serverless-python-requirements` configuration, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
+Para cumplir el objetivo, este proyecto tiene 4 archivos a tener en cuenta:
 
-## Usage
+**modelUmind.pt:** Este archivo es el modelo entrenado, que se utilizada para detectar las distintas partes del dibujo que se utilizaran para su posterior clasificacion
+**model_controller.py:** Este archivo contiene la logica correspondiente a la utilizacion del modelo, y el ordenamiento de los datos para poder luego clasificarlos
+**cloudinary_controller.py:** Este archivo contiene la logica que corresponde a la subida del dibujo a Cloudinary (En caso de utilizar la opcion de analisis de la imagen en base64)
+**indicadores_controller.py:** Este archivo contiene la clasificacion de indicadores
 
-### Prerequisites
+## Instalacion
 
-In order to package your dependencies locally with `serverless-python-requirements`, you need to have `Python3.9` installed locally. You can create and activate a dedicated virtual environment with the following command:
+### Prerequisitos
+
+Usted necesita tener Python 3 instalado en su PC para poder levantar este proyecto
+
+### Preparacion del ambiente
+
+Se debe generar un espacio virtual de Python para levantar el proyecto. Ejecute los siguientes comandos en la terminal desde la _raiz_ del proyecto
+```bash
+python -m venv ./venv
+./venv/bin/activate
+```
+### Instalacion de dependencias
+
+Para instalar las dependencias del proyecto, ejecute el siguiente comando en la terminal
 
 ```bash
-python3.9 -m venv ./venv
-source ./venv/bin/activate
-```
-
-Alternatively, you can also use `dockerizePip` configuration from `serverless-python-requirements`. For details on that, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
-
-### Deployment
-
-This example is made to work with the Serverless Framework dashboard, which includes advanced features such as CI/CD, monitoring, metrics, etc.
-
-In order to deploy with dashboard, you need to first login with:
-
-```
-serverless login
-```
-
-install dependencies with:
-
-```
-npm install
-```
-
-and
-
-```
 pip install -r requirements.txt
 ```
 
-and then perform deployment with:
+### Levantar aplicacion
 
-```
-serverless deploy
-```
-
-After running deploy, you should see output similar to:
+Para levantar la aplicacion, ejecute el siguiente comando en la terminal desde la _raiz_ del proyecto
 
 ```bash
-Deploying aws-python-flask-api-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-python-flask-api-project-dev (182s)
-
-endpoint: ANY - https://xxxxxxxx.execute-api.us-east-1.amazonaws.com
-functions:
-  api: aws-python-flask-api-project-dev-api (1.5 MB)
+python app.py
 ```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).
+Una vez ejecutado el comando, la aplicacion estara disponible en la url "_http://127.0.0.1:5000_"
 
-### Invocation
+## Pruebas
 
-After successful deployment, you can call the created application via HTTP:
+### Endpoints
+
+Para poder probar el proyecto, cuenta con 2 endpoints POST que se pueden ejecutar, por ejemplo, desde un PostMan
+
+_http://127.0.0.1:5000/predict_ 
+
+Con este endpoint se podra realizar el analisis, pasando por parametro una imagen en base64
+
+**Request:* 
 
 ```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
+{
+    "imagen": "IMAGEN_EN_BASE64"
+}
 ```
 
-Which should result in the following response:
+_http://127.0.0.1:5000/predict/url_ 
 
-```
-{"message":"Hello from root!"}
-```
+Con este endpoint se podra realizar el analisis, pasando por parametro una url de una imagen subida a internet
 
-Calling the `/hello` path with:
+**Request:* 
 
 ```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/hello
+{
+    "imagen": "URL_IMAGEN"
+}
 ```
 
-Should result in the following response:
+### Datos de prueba
 
-```bash
-{"message":"Hello from path!"}
-```
-
-If you try to invoke a path or method that does not have a configured handler, e.g. with:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/nonexistent
-```
-
-You should receive the following response:
-
-```bash
-{"error":"Not Found!"}
-```
-
-### Local development
-
-Thanks to capabilities of `serverless-wsgi`, it is also possible to run your application locally, however, in order to do that, you will need to first install `werkzeug` dependency, as well as all other dependencies listed in `requirements.txt`. It is recommended to use a dedicated virtual environment for that purpose. You can install all needed dependencies with the following commands:
-
-```bash
-pip install werkzeug
-pip install -r requirements.txt
-```
-
-At this point, you can run your application locally with the following command:
-
-```bash
-serverless wsgi serve
-```
-
-For additional local development capabilities of `serverless-wsgi` plugin, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi).
+En la _raiz_ del proyecto encontrara un archivo _"urls.txt"_ en donde encontrara distintas url de imagenes para poder realizar las pruebas
