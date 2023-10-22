@@ -7,9 +7,9 @@ UMind-api es un servicio backend desarrollado en Python, que sirve para analizar
 
 Para cumplir el objetivo, este proyecto tiene 4 archivos a tener en cuenta:
 
-**modelUmind.pt:** Este archivo es el modelo entrenado, que se utilizada para detectar las distintas partes del dibujo que se utilizaran para su posterior clasificacion
-**model_controller.py:** Este archivo contiene la logica correspondiente a la utilizacion del modelo, y el ordenamiento de los datos para poder luego clasificarlos
-**cloudinary_controller.py:** Este archivo contiene la logica que corresponde a la subida del dibujo a Cloudinary (En caso de utilizar la opcion de analisis de la imagen en base64)
+**modelUmind.pt:** Este archivo es el modelo entrenado, que se utilizada para detectar las distintas partes del dibujo que se utilizaran para su posterior clasificacion  
+**model_controller.py:** Este archivo contiene la logica correspondiente a la utilizacion del modelo, y el ordenamiento de los datos para poder luego clasificarlos  
+**cloudinary_controller.py:** Este archivo contiene la logica que corresponde a la subida del dibujo a Cloudinary (En caso de utilizar la opcion de analisis de la imagen en base64)  
 **indicadores_controller.py:** Este archivo contiene la clasificacion de indicadores
 
 ## Instalacion
@@ -23,7 +23,7 @@ Usted necesita tener Python 3 instalado en su PC para poder levantar este proyec
 Se debe generar un espacio virtual de Python para levantar el proyecto. Ejecute los siguientes comandos en la terminal desde la _raiz_ del proyecto
 ```bash
 python -m venv ./venv
-./venv/bin/activate
+. ./venv/bin/activate
 ```
 ### Instalacion de dependencias
 
@@ -72,6 +72,11 @@ Con este endpoint se podra realizar el analisis, pasando por parametro una url d
     "imagen": "URL_IMAGEN"
 }
 ```
+
+### Cloud
+
+La misma aplicacion, se encuentra disponible en AWS bajo la url _https://api.umind-app.com_
+Tenga en cuenta, que por una cuestion de costos, la aplicacion puede no encontrarse levantada en todo momento.
 
 ### Datos de prueba
 
