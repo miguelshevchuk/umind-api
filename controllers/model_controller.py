@@ -8,7 +8,6 @@ from controllers.indicadores import indicadores_controller
 partes = {0: 'cabeza', 1: 'oreja', 2: 'ojos', 3: 'nariz', 4: 'feliz', 5: 'pierna', 6: 'pie', 7: 'torso', 8: 'mano', 9: 'brazo'}
 
 def predict(img):
-    modeloEntrenado = "./modelUmind.pt"
     try:
         id=random.randrange(9999999999999999999999999)
         urlImagen = "https://res.cloudinary.com/dgvsnqsq0/image/upload/v1692754492/"+str(id)+".jpg"

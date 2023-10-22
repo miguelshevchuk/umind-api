@@ -5,11 +5,10 @@ UMind-api es un servicio backend desarrollado en Python, que sirve para analizar
 
 ## Estructura del proyecto
 
-Para cumplir el objetivo, este proyecto tiene 4 archivos a tener en cuenta:
+Para cumplir el objetivo, este proyecto tiene 3 archivos a tener en cuenta:
 
 **modelUmind.pt:** Este archivo es el modelo entrenado, que se utilizada para detectar las distintas partes del dibujo que se utilizaran para su posterior clasificacion  
 **model_controller.py:** Este archivo contiene la logica correspondiente a la utilizacion del modelo, y el ordenamiento de los datos para poder luego clasificarlos  
-**cloudinary_controller.py:** Este archivo contiene la logica que corresponde a la subida del dibujo a Cloudinary (En caso de utilizar la opcion de analisis de la imagen en base64)  
 **indicadores_controller.py:** Este archivo contiene la clasificacion de indicadores
 
 ## Instalacion
