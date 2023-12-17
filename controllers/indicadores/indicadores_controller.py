@@ -28,7 +28,7 @@ def sinPiernas(predicciones, indicadores):
             "Descripcion": "Puede ser indicador de conflictos para controlar impulsos hostiles"
         })
 def sinManos(predicciones, indicadores):
-    if len(predicciones["mano"]) == 0:
+    if len(predicciones["mano"]) < 2:
         indicadores.append({
             "Indicador": "No se detectan manos",
             "Descripcion": "Puede ser indicador de timidez y depresión"
@@ -151,7 +151,7 @@ def brazosLargos(predicciones, indicadores):
             })
 
 def manosGrandes(predicciones, indicadores):
-    if len(predicciones["mano"]) > 0:
+    if len(predicciones["mano"]) == 2:
         mano1 = predicciones["mano"][0]
         mano2 = predicciones["mano"][1]
         torso = predicciones["torso"][0]
@@ -168,7 +168,7 @@ def manosGrandes(predicciones, indicadores):
             })
 
 def manosChicas(predicciones, indicadores):
-    if len(predicciones["mano"]) > 0:
+    if len(predicciones["mano"]) == 2:
         mano1 = predicciones["mano"][0]
         mano2 = predicciones["mano"][1]
         torso = predicciones["torso"][0]
