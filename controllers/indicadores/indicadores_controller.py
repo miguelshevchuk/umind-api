@@ -182,7 +182,7 @@ def ojosGrandes(predicciones, indicadores):
     if len(predicciones["ojos"]) > 0:
         ojos = predicciones["ojos"][0]
         cabeza = predicciones["cabeza"][0]
-        if ojos["alto"] >= cabeza["alto"] * 0.1:
+        if ojos["alto"] >= cabeza["alto"] * 0.05:
             indicadores.append({
                 "Indicador": "Tamaño de ojos muy grandes",
                 "Descripcion": "Puede reflejar sentimientos de seguridad sobre si mismo y frente al mundo"
@@ -192,7 +192,7 @@ def ojosChicos(predicciones, indicadores):
     if len(predicciones["ojos"]) > 0:
         ojos = predicciones["ojos"][0]
         cabeza = predicciones["cabeza"][0]
-        if ojos["alto"] <= cabeza["alto"] * 0.05 or ojos["ancho"] <= cabeza["ancho"] * 0.4:
+        if ojos["alto"] <= cabeza["alto"] * 0.02 or ojos["ancho"] <= cabeza["ancho"] * 0.2:
             indicadores.append({
                 "Indicador": "Tamaño de ojos muy pequeños",
                 "Descripcion": "Puede ser indicador de sentimientos de rabia y frustración"
