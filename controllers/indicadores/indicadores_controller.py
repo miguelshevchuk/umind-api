@@ -182,7 +182,7 @@ def ojosGrandes(predicciones, indicadores):
     if len(predicciones["ojos"]) > 0:
         ojos = predicciones["ojos"][0]
         cabeza = predicciones["cabeza"][0]
-        if ojos["alto"] >= cabeza["alto"] * 0.15 or ojos["ancho"] >= cabeza["ancho"] * 0.7:
+        if ojos["alto"] >= cabeza["alto"] * 0.15 :
             indicadores.append({
                 "Indicador": "Tamaño de ojos muy grandes",
                 "Descripcion": "Puede reflejar sentimientos de seguridad sobre si mismo y frente al mundo"
