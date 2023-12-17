@@ -120,7 +120,7 @@ def brazosCortos(predicciones, indicadores):
         brazoD = predicciones["brazo"][0]
         brazoI = predicciones["brazo"][1]
         torso = predicciones["torso"][0]
-        if brazoD["alto"] <= torso["alto"]*0.80 or brazoI["alto"] <= torso["alto"]*0.80:
+        if brazoD["alto"] <= torso["alto"]*0.60 or brazoI["alto"] <= torso["alto"]*0.60:
             indicadores.append({
                 "Indicador": "Tamaño de brazos muy corto",
                 "Descripcion": "Puede ser indicador de aislamiento social"
@@ -182,7 +182,7 @@ def ojosGrandes(predicciones, indicadores):
     if len(predicciones["ojos"]) > 0:
         ojos = predicciones["ojos"][0]
         cabeza = predicciones["cabeza"][0]
-        if ojos["alto"] >= cabeza["alto"] * 0.15 :
+        if ojos["alto"] >= cabeza["alto"] * 0.1:
             indicadores.append({
                 "Indicador": "Tamaño de ojos muy grandes",
                 "Descripcion": "Puede reflejar sentimientos de seguridad sobre si mismo y frente al mundo"
@@ -192,7 +192,7 @@ def ojosChicos(predicciones, indicadores):
     if len(predicciones["ojos"]) > 0:
         ojos = predicciones["ojos"][0]
         cabeza = predicciones["cabeza"][0]
-        if ojos["alto"] <= cabeza["alto"] * 0.1 or ojos["ancho"] <= cabeza["ancho"] * 0.4:
+        if ojos["alto"] <= cabeza["alto"] * 0.05 or ojos["ancho"] <= cabeza["ancho"] * 0.4:
             indicadores.append({
                 "Indicador": "Tamaño de ojos muy pequeños",
                 "Descripcion": "Puede ser indicador de sentimientos de rabia y frustración"
