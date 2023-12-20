@@ -178,15 +178,7 @@ def manosChicas(predicciones, indicadores):
                 "Descripcion": "Puede ser indicador de pedido de ayuda de parte del paciente"
             })
 
-def ojosGrandes(predicciones, indicadores):
-    if len(predicciones["ojos"]) > 0:
-        ojos = predicciones["ojos"][0]
-        cabeza = predicciones["cabeza"][0]
-        if ojos["alto"] >= cabeza["alto"] * 0.05:
-            indicadores.append({
-                "Indicador": "Tamaño de ojos muy grandes",
-                "Descripcion": "Puede reflejar sentimientos de seguridad sobre si mismo y frente al mundo"
-            })
+
 
 def ojosChicos(predicciones, indicadores):
     if len(predicciones["ojos"]) > 0:
