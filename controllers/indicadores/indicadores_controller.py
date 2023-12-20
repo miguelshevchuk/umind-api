@@ -11,7 +11,6 @@ def generarIndicadores(predicciones):
     brazosLargos(predicciones, indicadores)
     manosGrandes(predicciones, indicadores)
     manosChicas(predicciones, indicadores)
-    ojosGrandes(predicciones, indicadores)
     ojosChicos(predicciones, indicadores)
     cabezaChica(predicciones, indicadores)
 
